@@ -72,10 +72,10 @@ contract Leaf is Ownable {
     }
 
     // 설문조사 결과 보기
-    function getSurveyResults(uint _surveyId) public view returns (string memory, string[] memory, uint[] memory, bool) {
+    function getSurveyResults(uint _surveyId) public view returns (Survey memory) {
         require(_surveyId < surveys.length, "Survey does not exist");
         Survey memory survey = surveys[_surveyId];
 
-        return (survey.question, survey.options, survey.voteCountPerOptions, survey.isActive)
+        return survey
     }
 }
