@@ -7,6 +7,7 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 // 메인 컨트랙트 선언
 contract Sakura is ERC20, Ownable {
     // 메인컨트랙트는 서브 컨트랙트를 소유
+    // TODO: 접근제어 수정 
     mapping(uint => address) leafMap;
     uint leafID = 0;
     uint maxSurveysPerLeaf = 50;
