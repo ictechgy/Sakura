@@ -31,6 +31,7 @@ contract Sakura is ERC20, Ownable {
         
         Leaf leaf = Leaf(leafMap[leafID]);
         leaf.createSurvey(_question, _options);
+        // TODO: max count 체트 필요
     }
 
     // TODO: 특정 설문조사 삭제 및 CRUD 필요
