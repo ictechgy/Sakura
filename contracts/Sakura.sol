@@ -10,7 +10,7 @@ contract Sakura is ERC20, Ownable {
     // TODO: 접근제어 수정 
     mapping(uint => address) leafMap;
     uint leafID = 0;
-    uint maxSurveysPerLeaf = 50;
+    uint maxSurveysPerLeaf = 50; // TODO: 조정 가능하게
 
     constructor() ERC20("Sakura", "SKURA") {
         _mint(msg.sender, 100000000000);
