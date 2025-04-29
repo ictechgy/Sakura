@@ -12,15 +12,15 @@ contract Sakura is ERC20, Ownable {
     uint leafID = 0;
     uint maxSurveysPerLeaf = 50; // TODO: 조정 가능하게
 
-    constructor() ERC20("Sakura", "SKURA") {
+    constructor() ERC20("Sakura", "SKURA") Ownable(msg.sender) {
         _mint(msg.sender, 100000000000);
     }
 
     // 새로운 서브 컨트랙트를 생성
     function createLeafContract() public onlyOwner {
         require(leafMap[leafID] == address(0), "leaf aleady created");
-        Leaf leaf = new Leaf();
-        leafMap[leafID] = address(leaf);
+        //Leaf leaf = new Leaf();
+        //leafMap[leafID] = address(leaf);
         leafID++;
     }
 
@@ -29,8 +29,8 @@ contract Sakura is ERC20, Ownable {
         uint latestLeafIndex = leafID - 1;
         require(leafMap[latestLeafIndex] != address(0), "lastest leaf does not exist");
         
-        Leaf leaf = Leaf(leafMap[leafID]);
-        leaf.createSurvey(_question, _options);
+        //Leaf leaf = Leaf(leafMap[leafID]);
+        //leaf.createSurvey(_question, _options);
         // TODO: max count 체트 필요
     }
 
@@ -38,7 +38,7 @@ contract Sakura is ERC20, Ownable {
 }
 
 // 하위 컨트랙트
-contract Leaf is Ownable {
+contract Leaf {
     struct Survey {
         string question;
         string[] options;
@@ -49,7 +49,7 @@ contract Leaf is Ownable {
     Survey[] surveys;
 
     // 설문조사 생성
-    function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
+    function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public {
         require(_options.length >= 2, "At least 2 options are required");
         uint[] memory initialVotes = new uint[](_options.length);
         surveys.push(
@@ -57,8 +57,8 @@ contract Leaf is Ownable {
                 {
                     question: _question,
                     options: _options,
-                    votes: initialVotes,
-                    active: _initialActiveState
+                    voteCountPerOptions: initialVotes,
+                    isActive: _initialActiveState
                 }
             )
         );
@@ -67,9 +67,9 @@ contract Leaf is Ownable {
     // 투표 함수
     function vote(uint _surveyId, uint _optionIndex) public {
         require(_surveyId < surveys.length, "Survey does not exist");
-        require(surveys[_surveyId].active, "Survey is not active");
+        require(surveys[_surveyId].isActive, "Survey is not active");
         require(_optionIndex < surveys[_surveyId].options.length, "Invalid option index");
-        surveys[_surveyId].votes[_optionIndex]++;
+        surveys[_surveyId].voteCountPerOptions[_optionIndex]++;
         // TODO: 사용자 체크 필요. msg.sender
     }
 
@@ -78,6 +78,6 @@ contract Leaf is Ownable {
         require(_surveyId < surveys.length, "Survey does not exist");
         Survey memory survey = surveys[_surveyId];
 
-        return survey
+        return survey;
     }
 }
