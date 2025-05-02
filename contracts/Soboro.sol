@@ -7,7 +7,7 @@ import { ERC20Burnable } from "@openzeppelin/contracts/token/ERC20/extensions/ER
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 // 메인 컨트랙트 선언
-contract Soboro is ERC20, Ownable {
+contract Soboro is ERC20, ERC20Capped,ERC20Burnable, Ownable {
     // 메인컨트랙트는 서브 컨트랙트를 소유
     // TODO: 접근제어 수정 
     uint256 private constant MAX_SUPPLY = 10**11;
@@ -15,7 +15,7 @@ contract Soboro is ERC20, Ownable {
     uint private crumbID = 0;
     uint private maxSurveysPerCrumb = 50; // TODO: 조정 가능하게
 
-    constructor() ERC20("Soboro", "SBR") Ownable(msg.sender) ERC20Capped(MAX_SUPPLY) ERC20Burnable {
+    constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) Ownable(msg.sender) {
         _mint(msg.sender, 10**5);
     }
 
