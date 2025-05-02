@@ -13,6 +13,22 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "increasedSupply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "cap",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC20ExceededCap",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "spender",
 						"type": "address"
@@ -61,6 +77,17 @@
 					}
 				],
 				"name": "ERC20InvalidApprover",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "cap",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC20InvalidCap",
 				"type": "error"
 			},
 			{
@@ -255,6 +282,50 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "burn",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "burnFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cap",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "createLeafContract",
 				"outputs": [],
@@ -420,6 +491,11 @@
 		],
 		"devdoc": {
 			"errors": {
+				"ERC20ExceededCap(uint256,uint256)": [
+					{
+						"details": "Total supply cap has been exceeded."
+					}
+				],
 				"ERC20InsufficientAllowance(address,uint256,uint256)": [
 					{
 						"details": "Indicates a failure with the `spender`’s `allowance`. Used in transfers.",
@@ -446,6 +522,11 @@
 						"params": {
 							"approver": "Address initiating an approval operation."
 						}
+					}
+				],
+				"ERC20InvalidCap(uint256)": [
+					{
+						"details": "The supplied cap is not a valid cap."
 					}
 				],
 				"ERC20InvalidReceiver(address)": [
@@ -501,6 +582,15 @@
 				},
 				"balanceOf(address)": {
 					"details": "See {IERC20-balanceOf}."
+				},
+				"burn(uint256)": {
+					"details": "Destroys a `value` amount of tokens from the caller. See {ERC20-_burn}."
+				},
+				"burnFrom(address,uint256)": {
+					"details": "Destroys a `value` amount of tokens from `account`, deducting from the caller's allowance. See {ERC20-_burn} and {ERC20-allowance}. Requirements: - the caller must have allowance for ``accounts``'s tokens of at least `value`."
+				},
+				"cap()": {
+					"details": "Returns the cap on the token's total supply."
 				},
 				"decimals()": {
 					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the default value returned by this function, unless it's overridden. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
@@ -586,6 +676,22 @@
 				"dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9"
 			]
 		},
+		"@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
+			"keccak256": "0x2659248df25e34000ed214b3dc8da2160bc39874c992b477d9e2b1b3283dc073",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c345af1b0e7ea28d1216d6a04ab28f5534a5229b9edf9ca3cd0e84950ae58d26",
+				"dweb:/ipfs/QmY63jtSrYpLRe8Gj1ep2vMDCKxGNNG3hnNVKBVnrs2nmA"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol": {
+			"keccak256": "0x9a961321311c070327b31fba89d821346225a411f946c9e84b330afdfdbb1d60",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://084698c9feace630ff29919baad9df0721944eb2ecaf942ef807935bbbe41b5a",
+				"dweb:/ipfs/Qmet4EQYqPLSKo7UPBNGaVw5NPATNkiLsqSCnCgg5kAPg4"
+			]
+		},
 		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
 			"keccak256": "0x70f2f713b13b7ce4610bcd0ac9fec0f3cc43693b043abcb8dc40a42a726eb330",
 			"license": "MIT",
@@ -603,11 +709,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0xa874d10e05b33d99a8baa060ffe05a35d327added6c3777838210510d17ff059",
+			"keccak256": "0x8ae7c8dfe20801ed7dcc4cdc692b7ab10982ec764d9ff2b8c1df876fc8e48cfe",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d61b89ca153899b545c1867368b31e08c45a39cb7fa6888c2cb0e2edb7e9f15b",
-				"dweb:/ipfs/QmVdzkiTYVt2CQnHgFvZ5U1MUiankGsK43h3cSBRYxmZ4q"
+				"bzz-raw://aaec94ccd3fd5d5af10c7a4e349243879521c17fe79c2bf71fe782ff822c3d01",
+				"dweb:/ipfs/QmbDfgQTNe7DhgvvRZfxjBY2nW4YT25briYmqyth1NpFpp"
 			]
 		}
 	},

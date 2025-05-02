@@ -7,7 +7,7 @@ import { ERC20Burnable } from "@openzeppelin/contracts/token/ERC20/extensions/ER
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 // 메인 컨트랙트 선언
-contract Soboro is ERC20, ERC20Capped,ERC20Burnable, Ownable {
+contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
     // 메인컨트랙트는 서브 컨트랙트를 소유
     // TODO: 접근제어 수정 
     uint256 private constant MAX_SUPPLY = 10**11;
@@ -19,18 +19,22 @@ contract Soboro is ERC20, ERC20Capped,ERC20Burnable, Ownable {
         _mint(msg.sender, 10**5);
     }
 
+    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Capped) {
+        super._update(from, to, value);
+    }
+
     // 새로운 서브 컨트랙트를 생성
     function createLeafContract() public onlyOwner {
-        require(leafMap[leafID] == address(0), "leaf aleady created");
-        //Leaf leaf = new Leaf();
-        //leafMap[leafID] = address(leaf);
-        leafID++;
+        require(crumbMap[crumbID] == address(0), "leaf aleady created");
+        Crumb crumb = new Crumb();
+        crumbMap[crumbID] = address(crumb);
+        crumbID++;
     }
 
     // 설문조사 생성 요청
     function createSurvey(string memory _question, string[] memory _options) public onlyOwner {
-        uint latestLeafIndex = leafID - 1;
-        require(leafMap[latestLeafIndex] != address(0), "lastest leaf does not exist");
+        uint latestLeafIndex = crumbID - 1;
+        require(crumbMap[latestLeafIndex] != address(0), "lastest leaf does not exist");
         
         //Leaf leaf = Leaf(leafMap[leafID]);
         //leaf.createSurvey(_question, _options);
