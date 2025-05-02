@@ -1,19 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import { ERC20Capped } from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
+import { ERC20Burnable } from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 // 메인 컨트랙트 선언
 contract Soboro is ERC20, Ownable {
     // 메인컨트랙트는 서브 컨트랙트를 소유
     // TODO: 접근제어 수정 
-    mapping(uint => address) leafMap;
-    uint leafID = 0;
-    uint maxSurveysPerLeaf = 50; // TODO: 조정 가능하게
+    uint256 private constant MAX_SUPPLY = 10**11;
+    mapping(uint => address) private crumbMap;
+    uint private crumbID = 0;
+    uint private maxSurveysPerCrumb = 50; // TODO: 조정 가능하게
 
-    constructor() ERC20("Soboro", "SBR") Ownable(msg.sender) {
-        _mint(msg.sender, 100000000000);
+    constructor() ERC20("Soboro", "SBR") Ownable(msg.sender) ERC20Capped(MAX_SUPPLY) ERC20Burnable {
+        _mint(msg.sender, 10**5);
     }
 
     // 새로운 서브 컨트랙트를 생성
