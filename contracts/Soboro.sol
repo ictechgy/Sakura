@@ -38,7 +38,7 @@ contract Soboro is ERC20, Ownable {
 }
 
 // 하위 컨트랙트
-contract Leaf {
+contract Crumb {
     struct Survey {
         string question;
         string[] options;

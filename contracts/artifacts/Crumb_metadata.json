@@ -61,7 +61,7 @@
 								"type": "bool"
 							}
 						],
-						"internalType": "struct Leaf.Survey",
+						"internalType": "struct Crumb.Survey",
 						"name": "",
 						"type": "tuple"
 					}
@@ -101,7 +101,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Soboro.sol": "Leaf"
+			"contracts/Soboro.sol": "Crumb"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -164,11 +164,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0xb78e1fa78b84f5c4e68b625be33ac3f1bf78569937641b71a3a05688f819f9ae",
+			"keccak256": "0xa874d10e05b33d99a8baa060ffe05a35d327added6c3777838210510d17ff059",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7cfc98a2afbc94b1959853359d000968222c68cb848bdf428ee1fe75b0989e51",
-				"dweb:/ipfs/Qmb2SNM3kFCKRwmssYuPZEaB78DSif9TBREAHJi6LZqDkc"
+				"bzz-raw://d61b89ca153899b545c1867368b31e08c45a39cb7fa6888c2cb0e2edb7e9f15b",
+				"dweb:/ipfs/QmVdzkiTYVt2CQnHgFvZ5U1MUiankGsK43h3cSBRYxmZ4q"
 			]
 		}
 	},
