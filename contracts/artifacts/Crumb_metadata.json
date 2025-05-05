@@ -32,38 +32,21 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_surveyId",
+						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "getSurveyResults",
+				"name": "surveys",
 				"outputs": [
 					{
-						"components": [
-							{
-								"internalType": "string",
-								"name": "question",
-								"type": "string"
-							},
-							{
-								"internalType": "string[]",
-								"name": "options",
-								"type": "string[]"
-							},
-							{
-								"internalType": "uint256[]",
-								"name": "voteCountPerOptions",
-								"type": "uint256[]"
-							},
-							{
-								"internalType": "bool",
-								"name": "isActive",
-								"type": "bool"
-							}
-						],
-						"internalType": "struct Crumb.Survey",
-						"name": "",
-						"type": "tuple"
+						"internalType": "string",
+						"name": "question",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -180,11 +163,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0x04406b23a85759a8f79a3696e48d0ad3d416492ea753d38bdd63b69a90db6589",
+			"keccak256": "0x2732368a55645f5f1ac664d8d39c295414ed1988b9cd9d3e6707fd258cb2549d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8b2f943acaafcd83f0d695ab26c4b46360387cc00edc75955ad2b4dad5bda5cb",
-				"dweb:/ipfs/QmXXf7Ctysg6wFu1qiFPeEHWUGDrb5bgAfgTgsiXafySZi"
+				"bzz-raw://cba9efeb9d9ce9fb92069c75b81c988cd533b1cac24c69b10f11e98122986ef2",
+				"dweb:/ipfs/QmQ5s4w7zSfCQqMVrB3WC3tYk6iiAgj4XyzcPkuKaKaJSU"
 			]
 		}
 	},

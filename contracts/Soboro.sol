@@ -57,7 +57,7 @@ contract Crumb {
         mapping(address => bool) hasVoted;
     }
 
-    Survey[] private surveys;
+    Survey[] public surveys;
 
     // 설문조사 생성
     function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public {
@@ -83,13 +83,5 @@ contract Crumb {
 
         surveys[_surveyId].voteCountPerOptions[_optionIndex]++;
         surveys[_surveyId].hasVoted[msg.sender] = true;
-    }
-
-    // 설문조사 결과 보기
-    function getSurveyResults(uint _surveyId) public view returns (Survey memory) {
-        require(_surveyId < surveys.length, "Survey does not exist");
-        Survey memory survey = surveys[_surveyId];
-
-        return survey;
     }
 }
