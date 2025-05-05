@@ -29,6 +29,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getSurveyCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -163,11 +176,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0x2732368a55645f5f1ac664d8d39c295414ed1988b9cd9d3e6707fd258cb2549d",
+			"keccak256": "0xd8a61f2e0b57a1777704f62e1931eec87c40dbf324377ac445128cda8df6d827",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://cba9efeb9d9ce9fb92069c75b81c988cd533b1cac24c69b10f11e98122986ef2",
-				"dweb:/ipfs/QmQ5s4w7zSfCQqMVrB3WC3tYk6iiAgj4XyzcPkuKaKaJSU"
+				"bzz-raw://bff1bb4a103b258afc88679c1d13c86944c84c12910ec20f97c4d43dc8ed33aa",
+				"dweb:/ipfs/QmXWDrjZ1vrG7CgmRHjBV3oJfw6ct717ZtHz2nUGkXWSgV"
 			]
 		}
 	},

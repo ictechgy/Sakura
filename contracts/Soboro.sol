@@ -37,6 +37,9 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
         require(crumbMap[latestCrumbIndex] != address(0), "lastest crumb does not exist. Who ate it?");
         
         Crumb crumb = Crumb(crumbMap[latestCrumbIndex]);
+        uint countOfSurvey = crumb.getSurveyCount();
+
+        
         crumb.createSurvey(_question, _options, _initialActiveState);
         // TODO: max count 체크 필요
     }
@@ -83,5 +86,9 @@ contract Crumb {
 
         surveys[_surveyId].voteCountPerOptions[_optionIndex]++;
         surveys[_surveyId].hasVoted[msg.sender] = true;
+    }
+
+    function getSurveyCount() public view returns (uint256) {
+        return surveys.length;
     }
 }
