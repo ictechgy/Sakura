@@ -389,6 +389,11 @@
 						"internalType": "string[]",
 						"name": "_options",
 						"type": "string[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "_initialActiveState",
+						"type": "bool"
 					}
 				],
 				"name": "requestSurveyCreationOnCrumb",
@@ -709,11 +714,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0x15467ca51236ebc60384673754a8b0c552a43bf891e0809cdde1889bbc52fc18",
+			"keccak256": "0x04406b23a85759a8f79a3696e48d0ad3d416492ea753d38bdd63b69a90db6589",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fbd4effcd761d8f84b5af0c443ff4c4c6fddd4a8c22faba6d9bd9249ecbdaa7b",
-				"dweb:/ipfs/QmVAQ5AXuFup4ZwH1dXGC4vURDCTzjV5xCdYYxBfpyaC6f"
+				"bzz-raw://8b2f943acaafcd83f0d695ab26c4b46360387cc00edc75955ad2b4dad5bda5cb",
+				"dweb:/ipfs/QmXXf7Ctysg6wFu1qiFPeEHWUGDrb5bgAfgTgsiXafySZi"
 			]
 		}
 	},

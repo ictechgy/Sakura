@@ -32,14 +32,17 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
     }
 
     // 설문조사 생성 요청
-    function requestSurveyCreationOnCrumb(string memory _question, string[] memory _options) public onlyOwner {
+    function requestSurveyCreationOnCrumb(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
         uint latestCrumbIndex = crumbGenID - 1;
         require(crumbMap[latestCrumbIndex] != address(0), "lastest crumb does not exist. Who ate it?");
         
-        //Leaf leaf = Leaf(leafMap[leafID]);
-        //leaf.createSurvey(_question, _options);
-        // TODO: max count 체트 필요
+        Crumb crumb = Crumb(crumbMap[latestCrumbIndex]);
+        crumb.createSurvey(_question, _options, _initialActiveState);
+        // TODO: max count 체크 필요
     }
+
+    // 활성화상태 변경
+
 
     // TODO: 특정 설문조사 삭제 및 CRUD 필요
 }
