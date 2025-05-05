@@ -12,7 +12,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
     // TODO: 접근제어 수정 
     uint256 private constant MAX_SUPPLY = 10**11;
     mapping(uint => address) private crumbMap;
-    uint private crumbID = 0;
+    uint private crumbGenID = 0;
     uint private maxSurveysPerCrumb = 50; // TODO: 조정 가능하게
 
     constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) Ownable(msg.sender) {
@@ -24,17 +24,17 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
     }
 
     // 새로운 서브 컨트랙트를 생성
-    function createLeafContract() public onlyOwner {
-        require(crumbMap[crumbID] == address(0), "leaf aleady created");
+    function createCrumbContract() public onlyOwner {
+        require(crumbMap[crumbGenID] == address(0), "crumb aleady baked");
         Crumb crumb = new Crumb();
-        crumbMap[crumbID] = address(crumb);
-        crumbID++;
+        crumbMap[crumbGenID] = address(crumb);
+        crumbGenID++;
     }
 
     // 설문조사 생성 요청
-    function createSurvey(string memory _question, string[] memory _options) public onlyOwner {
-        uint latestLeafIndex = crumbID - 1;
-        require(crumbMap[latestLeafIndex] != address(0), "lastest leaf does not exist");
+    function requestSurveyCreationOnCrumb(string memory _question, string[] memory _options) public onlyOwner {
+        uint latestCrumbIndex = crumbGenID - 1;
+        require(crumbMap[latestCrumbIndex] != address(0), "lastest crumb does not exist. Who ate it?");
         
         //Leaf leaf = Leaf(leafMap[leafID]);
         //leaf.createSurvey(_question, _options);
