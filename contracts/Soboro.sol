@@ -54,24 +54,24 @@ contract Crumb {
         string[] options;
         uint[] voteCountPerOptions;
         bool isActive;
+        mapping(address => bool) hasVoted;
     }
 
-    Survey[] surveys;
+    Survey[] private surveys;
 
     // 설문조사 생성
     function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public {
         require(_options.length >= 2, "At least 2 options are required");
+        
+        surveys.push();
+
+        Survey storage survey = surveys[surveys.length - 1];
         uint[] memory initialVotes = new uint[](_options.length);
-        surveys.push(
-            Survey(
-                {
-                    question: _question,
-                    options: _options,
-                    voteCountPerOptions: initialVotes,
-                    isActive: _initialActiveState
-                }
-            )
-        );
+        survey.question = _question;
+        survey.options = _options;
+        survey.voteCountPerOptions = initialVotes;
+        survey.isActive = _initialActiveState;
+
     }
 
     // 투표 함수
@@ -79,8 +79,10 @@ contract Crumb {
         require(_surveyId < surveys.length, "Survey does not exist");
         require(surveys[_surveyId].isActive, "Survey is not active");
         require(_optionIndex < surveys[_surveyId].options.length, "Invalid option index");
+        require(surveys[_surveyId].hasVoted[msg.sender] == false, "User has already voted");
+
         surveys[_surveyId].voteCountPerOptions[_optionIndex]++;
-        // TODO: 사용자 체크 필요. msg.sender
+        surveys[_surveyId].hasVoted[msg.sender] = true;
     }
 
     // 설문조사 결과 보기
