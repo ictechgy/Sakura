@@ -63,6 +63,22 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
         
         crumb.changeActiveStatus(surveyIndex, isActive);
     }
+
+    // 특정 설문에 참여
+    function vote(uint crumbID, uint surveyIndex, uint optionIndex) public {
+        require(crumbID >= 0 && surveyIndex >= 0 && optionIndex >= 0 && crumbID < crumbGenID, "invalid vote request");
+        
+        Crumb crumb = Crumb(crumbMap[crumbID]);
+
+        require(surveyIndex < crumb.getSurveyCount() , "survey does not exist");
+
+        (, bool isSurveyActive) = crumb.surveys(surveyIndex);
+        require(isSurveyActive == true, "survey is not activated");
+        require(crumb.hasVoted(surveyIndex) == false, "aleady voted");
+
+        crumb.vote(surveyIndex, optionIndex);
+    }
+
     // TODO: 특정 설문조사 삭제 및 CRUD 필요
 
     // Crumb 갯수 반환
@@ -133,5 +149,12 @@ contract Crumb {
     // 설문 갯수 반환
     function getSurveyCount() public view returns (uint256) {
         return surveys.length;
+    }
+
+    // msg.sender가 특정 설문에 참여했는지 확인
+    function hasVoted(uint surveyID) public view returns (bool) {
+        require(surveyID < surveys.length, "invalid survey ID");
+
+        return surveys[surveyID].hasVoted[msg.sender];
     }
 }

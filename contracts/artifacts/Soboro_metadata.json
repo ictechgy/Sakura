@@ -560,6 +560,29 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "crumbID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "surveyIndex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "optionIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "vote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -782,11 +805,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0xf9bf93660d8ca4a5fcb13f0ed1d80d85298eb0c6ac597f1010c0e9b2593b64d3",
+			"keccak256": "0xff211883de84a258253002fd19877a24f1ee480acfc3fdd7e8676272bc58aded",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2ea2cedb0977cc0c134eec29b0b019d0636c36904a6864c5cf1d1eff0f7b3091",
-				"dweb:/ipfs/QmaBPjc177nZkwx119b6wanHrGEw2cocG4TLRghEzm3Coq"
+				"bzz-raw://079fa6c600bdc05aaa9b18381a221d946370d47b53c7a9a85a68e1c031e9bada",
+				"dweb:/ipfs/QmcxGaw5UVtZR8K7stQT6oduS7dAhAb4rGJzHhs3L8pBBr"
 			]
 		}
 	},
