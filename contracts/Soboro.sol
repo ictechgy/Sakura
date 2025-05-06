@@ -33,6 +33,9 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
 
     // 설문조사 생성 요청
     function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
+        require(bytes(_question).length != 0, "invalid question");
+        require(_options.length >= 2, "At least 2 options are required");
+
         uint latestCrumbIndex = crumbGenID - 1;
         require(crumbMap[latestCrumbIndex] != address(0), "lastest crumb does not exist. Who ate it?");
         
