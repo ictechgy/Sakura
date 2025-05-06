@@ -55,8 +55,8 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
 
         require(surveyIndex < crumb.getSurveyCount() , "survey does not exist");
 
-        crumb.surveys(surveyIndex);
-        //require( , "survey is already in the desired active state");
+        (, bool isSurveyActive) = crumb.surveys(surveyIndex);
+        require(isSurveyActive != isActive , "survey is already in the desired active state");
         
         crumb.changeActiveStatus(surveyIndex, isActive);
     }
