@@ -98,6 +98,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable /* TODO: Access Co
     }
 
     // TODO: 특정 설문조사 삭제 및 CRUD 필요
+    // TODO: Proxy 패턴 또는 CrumbManager
 }
 
 // 하위 컨트랙트
