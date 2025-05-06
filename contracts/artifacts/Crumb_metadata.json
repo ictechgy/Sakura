@@ -63,6 +63,44 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "surveyIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "getSurveyOptions",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "surveyIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "getSurveyVoteCountPerOptions",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "surveyID",
 						"type": "uint256"
 					}
@@ -213,11 +251,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0xff211883de84a258253002fd19877a24f1ee480acfc3fdd7e8676272bc58aded",
+			"keccak256": "0xa6a11137abd8917df988188e2fbb2a97d434573e1bfafa5906ee68dc6def73cc",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://079fa6c600bdc05aaa9b18381a221d946370d47b53c7a9a85a68e1c031e9bada",
-				"dweb:/ipfs/QmcxGaw5UVtZR8K7stQT6oduS7dAhAb4rGJzHhs3L8pBBr"
+				"bzz-raw://000ca8532228eda4ffa2fe4a13af4d53da1783ba9557602787005f19866692ae",
+				"dweb:/ipfs/Qmajy6HDRijjM9vLZUmHMjXT959KrDLgcYnphBXRm5sPy5"
 			]
 		}
 	},

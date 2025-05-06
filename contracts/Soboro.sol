@@ -157,4 +157,18 @@ contract Crumb {
 
         return surveys[surveyID].hasVoted[msg.sender];
     }
+
+    // 특정 index Survey의 부가정보(선택지) 조회 (자동 getter에서 돌려주지 않는)
+    function getSurveyOptions(uint surveyIndex) public view returns (string[] memory) {
+        require(surveyIndex >= 0 && surveyIndex < surveys.length, "invalid index");
+        
+        return surveys[surveyIndex].options;
+    }
+
+    // 특정 index Survey의 부가정보(항목별 투표 수) 조회 (자동 getter에서 돌려주지 않는)
+    function getSurveyVoteCountPerOptions(uint surveyIndex) public view returns (uint256[] memory) {
+        require(surveyIndex >= 0 && surveyIndex < surveys.length , "invalid index");
+        
+        return surveys[surveyIndex].voteCountPerOptions;
+    }
 }
