@@ -194,11 +194,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0x64de50fdaeb5418fb8e4e2fbc127d7411a697be8b4beb62b3f221430bfaf67f4",
+			"keccak256": "0x9a631947de13642506a7eecdfcec0593e50be596061fb72a47f1a84bc895ac5c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0a7e6295ede199c499c577640dc55f87d6918eec21de8598f6a7fee469b8ad90",
-				"dweb:/ipfs/QmYvuYVfoENLGv9gUGweMNcd5MFTjhQdFy4BzPbmT3Gfwv"
+				"bzz-raw://efc1425d304431dbcb28d70cd5cf3730ca411b6b57d9847f4f9058a9131d2eb9",
+				"dweb:/ipfs/QmNNu2TCHhvPutzwZCAXW9g1uDm2ffwnKW1N4mWKYJXWo8"
 			]
 		}
 	},
