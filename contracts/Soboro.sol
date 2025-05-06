@@ -164,7 +164,8 @@ contract Crumb is Ownable {
     function getSurveyOptions(uint surveyIndex) public view returns (string[] memory) {
         require(surveyIndex >= 0 && surveyIndex < surveys.length, "invalid index");
         
-        return surveys[surveyIndex].options;
+        string[] memory options = surveys[surveyIndex].options; // TODO: 캐스팅 명시화 필요한지 확인
+        return options;
     }
 
     // 특정 index Survey의 부가정보(항목별 투표 수) 조회 (자동 getter에서 돌려주지 않는)
