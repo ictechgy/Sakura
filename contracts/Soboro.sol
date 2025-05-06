@@ -102,7 +102,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
 }
 
 // 하위 컨트랙트
-contract Crumb {
+contract Crumb is Ownable {
     struct Survey {
         string question;
         string[] options;
@@ -113,8 +113,10 @@ contract Crumb {
 
     Survey[] public surveys;
 
+    constructor() Ownable(msg.sender) { }
+
     // 설문조사 생성
-    function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public {
+    function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
         require(_options.length >= 2, "At least 2 options are required");
         
         surveys.push();
@@ -140,7 +142,7 @@ contract Crumb {
     }
 
     // 활성화 상태 변경
-    function changeActiveStatus(uint surveyIndex, bool isActive) public {
+    function changeActiveStatus(uint surveyIndex, bool isActive) public onlyOwner {
         require(surveys[surveyIndex].isActive != isActive , "survey is already in the desired active state");
         
         surveys[surveyIndex].isActive = isActive;
