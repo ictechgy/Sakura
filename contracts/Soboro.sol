@@ -9,7 +9,6 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 // 메인 컨트랙트 선언
 contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
     // 메인컨트랙트는 서브 컨트랙트를 소유
-    // TODO: 접근제어 수정 
     uint256 private constant MAX_SUPPLY = 10**11;
     mapping(uint => address) private crumbMap;
     uint private crumbGenID = 0;
