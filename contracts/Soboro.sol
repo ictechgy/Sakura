@@ -78,8 +78,6 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
         crumb.vote(surveyIndex, optionIndex);
     }
 
-    // TODO: 특정 설문조사 삭제 및 CRUD 필요
-
     // Crumb 갯수 반환
     function getCrumbCount() public view returns (uint) {
         return crumbGenID;
@@ -98,6 +96,8 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
         
         maxSurveysPerCrumb = newMaxSurveyCount;
     }
+
+    // TODO: 특정 설문조사 삭제 및 CRUD 필요
 }
 
 // 하위 컨트랙트
