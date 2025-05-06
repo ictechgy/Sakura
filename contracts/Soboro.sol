@@ -61,6 +61,10 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
         crumb.changeActiveStatus(surveyIndex, isActive);
     }
     // TODO: 특정 설문조사 삭제 및 CRUD 필요
+
+    function getCrumbCount() public view returns (uint) {
+        return crumbGenID;
+    }
 }
 
 // 하위 컨트랙트

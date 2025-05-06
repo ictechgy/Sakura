@@ -370,6 +370,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "getCrumbCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "name",
 				"outputs": [
 					{
@@ -737,11 +750,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0x52a8ee7279e17a4dec286360fd9e26e2336496d37b74a21b3c899ba735da3e89",
+			"keccak256": "0xc0b99fb68b5cc81fb3829ff6cb6c768558b9d409705722eb8342901d53d0df99",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d5a3894651f7d8bc3460944bb2ea1fa6b512f20a57f429c23fc261bd45fbbcdd",
-				"dweb:/ipfs/QmU8Hv5uq8sdWLrVHy4bgHjE2sKuZtbgYXQEYkvxfXotbU"
+				"bzz-raw://539292a337a801fbb6b120399fa35802a7c642b9b1817366c2c0581901f43de4",
+				"dweb:/ipfs/QmZzCAv26mDJu47ssuepd69dqLiixq3BScWwgvd1T6pD8p"
 			]
 		}
 	},
