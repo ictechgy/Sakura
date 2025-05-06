@@ -13,7 +13,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
     uint256 private constant MAX_SUPPLY = 10**11;
     mapping(uint => address) private crumbMap;
     uint private crumbGenID = 0;
-    uint private maxSurveysPerCrumb = 50; // TODO: 조정 가능하게
+    uint private maxSurveysPerCrumb = 50;
 
     constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) Ownable(msg.sender) {
         _mint(msg.sender, 10**5);
