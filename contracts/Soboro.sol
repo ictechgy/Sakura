@@ -7,7 +7,7 @@ import { ERC20Burnable } from "@openzeppelin/contracts/token/ERC20/extensions/ER
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 // 메인 컨트랙트 선언
-contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
+contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable /* TODO: Access Control */ {
     // 메인컨트랙트는 서브 컨트랙트를 소유
     uint256 private constant MAX_SUPPLY = 10**11;
     mapping(uint => address) private crumbMap;
