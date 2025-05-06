@@ -44,7 +44,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable /* TODO: Access Co
         if (countOfSurvey < maxSurveysPerCrumb) {
             crumb.createSurvey(_question, _options, _initialActiveState);
         } else {
-            revert("max survey count per crumb reached. create Crumb first");
+            revert("max survey count per crumb reached. create Crumb first"); // 크게 revert 할 내용 없음
         }
     }
 
