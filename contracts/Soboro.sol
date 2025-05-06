@@ -65,6 +65,12 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable {
     function getCrumbCount() public view returns (uint) {
         return crumbGenID;
     }
+
+    function getCrumb(uint index) public view returns (Crumb) {
+        require(index >= 0 && index < crumbGenID, "invalid index");
+
+        return Crumb(crumbMap[index]);
+    }
 }
 
 // 하위 컨트랙트
