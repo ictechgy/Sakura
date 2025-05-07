@@ -13,6 +13,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable /* TODO: Access Co
     mapping(uint => address) private crumbMap;
     uint private crumbGenID = 0;
     uint private maxSurveysPerCrumb = 50;
+    // TODO: - Access Control에 Proposal 역할 및 설문 제안에 따른 reward? / 어떤 사람이 Proposal이 될 것인지, 어떤 설문이 뽑힐 것인지 결정하는 방식 필요
 
     constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) Ownable(msg.sender) {
         _mint(msg.sender, 10**5);
@@ -48,6 +49,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable /* TODO: Access Co
         }
     }
 
+    // TODO: - 활성화 상태 변경 또는 투표 종료 시 보상 생태계 
     // 활성화상태 변경
     function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyOwner {
         require(crumbID >= 0 && surveyIndex >= 0, "invalid ID/Index");
@@ -106,9 +108,9 @@ contract Crumb is Ownable {
     struct Survey {
         string question;
         string[] options;
-        uint[] voteCountPerOptions;
+        uint[] voteCountPerOptions; // TODO: - event로 슬롯 효율화 가능 
         bool isActive;
-        mapping(address => bool) hasVoted;
+        mapping(address => bool) hasVoted; // TODO: - 유저 한명당 1bit로 하여 인덱싱한 뒤 효율화 
     }
 
     Survey[] public surveys;
