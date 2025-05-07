@@ -4,19 +4,23 @@ pragma solidity 0.8.26;
 import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import { ERC20Capped } from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import { ERC20Burnable } from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
-import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
+import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
 // 메인 컨트랙트 선언
-contract Soboro is ERC20, ERC20Capped, ERC20Burnable, Ownable /* TODO: Access Control */ {
-    // 메인컨트랙트는 서브 컨트랙트를 소유
+contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
+    bytes32 private constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 private constant BURNER_ROLE = keccak256("BURNER_ROLE");
     uint256 private constant MAX_SUPPLY = 10**11;
+
+    // 메인컨트랙트는 서브 컨트랙트를 소유
     mapping(uint => address) private crumbMap;
     uint private crumbGenID = 0;
     uint private maxSurveysPerCrumb = 50;
     // TODO: - Access Control에 Proposal 역할 및 설문 제안에 따른 reward? / 어떤 사람이 Proposal이 될 것인지, 어떤 설문이 뽑힐 것인지 결정하는 방식 필요
 
-    constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) Ownable(msg.sender) {
+    constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) {
         _mint(msg.sender, 10**5);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
     function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Capped) {
