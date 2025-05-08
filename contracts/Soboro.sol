@@ -10,6 +10,7 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
 contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
     bytes32 private constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 private constant BURNER_ROLE = keccak256("BURNER_ROLE");
+    bytes32 private constant PROPOSAL_ROLE = keccak256("PROPOSAL_ROLE");
     uint256 private constant MAX_SUPPLY = 10**11;
 
     // 메인컨트랙트는 서브 컨트랙트를 소유
