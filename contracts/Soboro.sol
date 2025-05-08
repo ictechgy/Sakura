@@ -106,7 +106,6 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
         maxSurveysPerCrumb = newMaxSurveyCount;
     }
 
-    // TODO: 특정 설문조사 삭제 및 CRUD 필요
     // TODO: Proxy 패턴 또는 CrumbManager
 }
 
