@@ -5,6 +5,7 @@ import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import { ERC20Capped } from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import { ERC20Burnable } from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 // 메인 컨트랙트 선언
 contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
@@ -30,7 +31,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
     }
 
     // 새로운 서브 컨트랙트를 생성
-    function createCrumbContract() public onlyOwner {
+    function createCrumbContract() public onlyRole(BAKER_ROLE) {
         require(crumbMap[crumbGenID] == address(0), "crumb aleady baked");
         Crumb crumb = new Crumb();
         crumbMap[crumbGenID] = address(crumb);
@@ -38,7 +39,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
     }
 
     // 설문조사 생성 요청
-    function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
+    function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyRole(PROPOSAL_ROLE) {
         require(bytes(_question).length != 0, "invalid question");
         require(_options.length >= 2, "At least 2 options are required");
 
@@ -57,7 +58,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
 
     // TODO: - 활성화 상태 변경 또는 투표 종료 시 보상 생태계 
     // 활성화상태 변경
-    function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyOwner {
+    function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyRole(PROPOSAL_ROLE) {
         require(crumbID >= 0 && surveyIndex >= 0, "invalid ID/Index");
         require(crumbMap[crumbID] != address(0), "crumb not exists");
         
@@ -99,7 +100,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
     }
 
     // maxCount 조정
-    function setMaxSurveyCount(uint newMaxSurveyCount) public onlyOwner {
+    function setMaxSurveyCount(uint newMaxSurveyCount) public onlyRole(BAKER_ROLE) {
         require(newMaxSurveyCount >= 1, "invalid count");
         
         maxSurveysPerCrumb = newMaxSurveyCount;
