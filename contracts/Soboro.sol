@@ -63,7 +63,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
         }
     }
 
-    // TODO: - 활성화 상태 변경 또는 투표 종료 시 보상 생태계 
+    // TODO: - 보상 생태계(활성화 상태 변경했을 때 또는 투표 종료 시 - batch)
     // 활성화상태 변경
     function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyRole(PROPOSAL_ROLE) {
         require(crumbID >= 0 && surveyIndex >= 0, "invalid ID/Index");
