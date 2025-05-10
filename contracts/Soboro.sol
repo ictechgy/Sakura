@@ -102,6 +102,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
     // 특정 index Crumb 반환
     function getCrumb(uint index) public view returns (Crumb) {
         require(index >= 0 && index < crumbGenID, "invalid index");
+        require(crumbMap[index] != address(0), "crumb not exists");
 
         return Crumb(crumbMap[index]);
     }
