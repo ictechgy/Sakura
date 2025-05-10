@@ -38,6 +38,13 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
         crumbGenID++;
     }
 
+    // ID 정정
+    function correctCrumbGenID(uint newID) public onlyRole(BAKER_ROLE) {
+        require(newID >= 0 && crumbMap[newID] == address(0), "invalid new ID");
+
+        crumbGenID = newID;
+    }
+
     // 설문조사 생성 요청
     function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyRole(PROPOSAL_ROLE) {
         require(bytes(_question).length != 0, "invalid question");

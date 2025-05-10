@@ -52,6 +52,31 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "voter",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "surveyIndex",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "optionIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "Voted",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -384,11 +409,11 @@
 			]
 		},
 		"contracts/Soboro.sol": {
-			"keccak256": "0x719fa6c04bcae36aa7d0980764399cbcc51bb0ed7084b1b851cb587701e8c94e",
+			"keccak256": "0x86a2105a1514c557859535eb7fa63b211d9e29cd97444315bca9ee59bb52d55c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://40326c4e5486097103d14debed746a2f2856a819cbc9314aba05a3f762a2f55e",
-				"dweb:/ipfs/QmVCxCWEtiQhY96UYZGumpcz5AvcqZfzerwW296py5njJi"
+				"bzz-raw://fee65957f1d2449c5b4ff5358b8b96b69f1dc905fb61e47c35bd1b0d6f67d96a",
+				"dweb:/ipfs/QmfUPUsBgDtt9RF5v1xZmPp79iUo8bKmAsMG3J3xuSDbGp"
 			]
 		}
 	},
