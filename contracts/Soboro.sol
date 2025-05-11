@@ -161,6 +161,7 @@ contract Crumb is Ownable {
 
     // 활성화 상태 변경
     function changeActiveStatus(uint surveyIndex, bool isActive) public onlyOwner {
+        require(surveyIndex >= 0 && surveyIndex < surveys.length, "invalid index");
         require(surveys[surveyIndex].isActive != isActive , "survey is already in the desired active state");
         
         surveys[surveyIndex].isActive = isActive;
