@@ -27,7 +27,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl, ReentrancyG
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
-    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Capped) {
+    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Capped) onlyRole(MINTER_ROLE) onlyRole(BURNER_ROLE) onlyRole(DEFAULT_ADMIN_ROLE) {
         super._update(from, to, value);
     }
 
