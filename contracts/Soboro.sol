@@ -150,7 +150,7 @@ contract Crumb is Ownable {
     }
 
     // 투표 함수
-    function vote(uint _surveyID, uint _optionIndex) public {
+    function vote(uint _surveyID, uint _optionIndex) public { // TODO: nonReentrant 고려
         require(msg.sender != address(0), "invalid request");
         require(_surveyID >= 0 && _surveyID < surveys.length, "invalid id");
         require(surveys[_surveyID].isActive, "Survey is not active");
