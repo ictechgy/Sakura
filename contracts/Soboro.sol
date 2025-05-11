@@ -134,6 +134,7 @@ contract Crumb is Ownable {
 
     // 설문조사 생성
     function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
+        require(bytes(_question).length != 0, "empty question is not allowed");
         require(_options.length >= 2, "At least 2 options are required");
         
         surveys.push();
@@ -148,14 +149,14 @@ contract Crumb is Ownable {
     }
 
     // 투표 함수
-    function vote(uint _surveyId, uint _optionIndex) public {
-        require(_surveyId < surveys.length, "Survey does not exist");
-        require(surveys[_surveyId].isActive, "Survey is not active");
-        require(_optionIndex < surveys[_surveyId].options.length, "Invalid option index");
-        require(surveys[_surveyId].hasVoted[msg.sender] == false, "User has already voted");
+    function vote(uint _surveyID, uint _optionIndex) public {
+        require(_surveyID >= 0 && _surveyID < surveys.length, "invalid id");
+        require(surveys[_surveyID].isActive, "Survey is not active");
+        require(_optionIndex < surveys[_surveyID].options.length, "Invalid option index");
+        require(surveys[_surveyID].hasVoted[msg.sender] == false, "User has already voted");
 
-        surveys[_surveyId].voteCountPerOptions[_optionIndex]++;
-        surveys[_surveyId].hasVoted[msg.sender] = true;
+        surveys[_surveyID].voteCountPerOptions[_optionIndex]++;
+        surveys[_surveyID].hasVoted[msg.sender] = true;
     }
 
     // 활성화 상태 변경
