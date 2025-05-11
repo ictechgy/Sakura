@@ -9,7 +9,7 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuardTransient.sol";
 
 // 메인 컨트랙트 선언
-contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
+contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl, ReentrancyGuardTransient {
     bytes32 private constant BAKER_ROLE = keccak256("BAKER_ROLE");
     bytes32 private constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 private constant BURNER_ROLE = keccak256("BURNER_ROLE");
@@ -47,7 +47,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
     }
 
     // 설문조사 생성 요청
-    function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyRole(PROPOSAL_ROLE) nonReentrant() {
+    function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyRole(PROPOSAL_ROLE) nonReentrant {
         require(bytes(_question).length != 0, "empty question is not allowed");
         require(_options.length >= 2, "At least 2 options are required");
 
