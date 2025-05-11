@@ -157,6 +157,8 @@ contract Crumb is Ownable {
 
         surveys[_surveyID].voteCountPerOptions[_optionIndex]++;
         surveys[_surveyID].hasVoted[msg.sender] = true;
+
+        emit Voted(msg.sender, _surveyID, _optionIndex);
     }
 
     // 활성화 상태 변경
