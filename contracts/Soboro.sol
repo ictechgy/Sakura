@@ -123,7 +123,7 @@ contract Crumb is Ownable {
     struct Survey {
         string question;
         string[] options;
-        uint[] voteCountPerOptions; // TODO: - event로 슬롯 효율화 가능 
+        uint[] voteCountPerOptions; // TODO: - event로 슬롯 효율화 가능, overflow 방지
         bool isActive;
         mapping(address => bool) hasVoted; // TODO: - 유저 한명당 1bit로 하여 인덱싱한 뒤 효율화 / 또는 event log로 외부에서 필터링? 
     }
