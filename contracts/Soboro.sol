@@ -172,9 +172,9 @@ contract Crumb is Ownable {
         return surveys.length;
     }
 
-    // msg.sender가 특정 설문에 참여했는지 확인
-    function hasVoted(uint surveyID) public view returns (bool) {
-        require(surveyID < surveys.length, "invalid survey ID");
+    // 내가 특정 설문에 참여했는지 확인 (msg.sender)
+    function amIVoted(uint surveyID) public view returns (bool) {
+        require(surveyID >= 0 && surveyID < surveys.length, "invalid survey ID");
 
         return surveys[surveyID].hasVoted[msg.sender];
     }
