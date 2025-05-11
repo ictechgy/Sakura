@@ -89,7 +89,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl {
 
         (, bool isSurveyActive) = crumb.surveys(surveyIndex);
         require(isSurveyActive == true, "survey is not activated");
-        require(crumb.hasVoted(surveyIndex) == false, "aleady voted");
+        require(crumb.amIVoted(surveyIndex) == false, "aleady voted");
 
         crumb.vote(surveyIndex, optionIndex);
     }
