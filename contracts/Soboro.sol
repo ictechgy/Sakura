@@ -86,6 +86,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl, ReentrancyG
 
     // 특정 설문에 참여
     function vote(uint crumbID, uint surveyIndex, uint optionIndex) public {
+        require(msg.sender != address(0), "invalid address");
         require(crumbID >= 0 && surveyIndex >= 0 && optionIndex >= 0 && crumbID < crumbGenID, "invalid vote request");
         
         Crumb crumb = Crumb(crumbMap[crumbID]);
