@@ -162,8 +162,8 @@ contract Crumb is Ownable {
         require(_optionIndex < surveys[_surveyID].options.length, "Invalid option index");
         require(surveys[_surveyID].hasVoted[msg.sender] == false, "User has already voted");
 
-        surveys[_surveyID].voteCountPerOptions[_optionIndex]++;
         surveys[_surveyID].hasVoted[msg.sender] = true;
+        surveys[_surveyID].voteCountPerOptions[_optionIndex]++;
 
         emit Voted(msg.sender, _surveyID, _optionIndex);
     }
