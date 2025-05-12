@@ -22,7 +22,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl, ReentrancyG
     uint private maxSurveysPerCrumb = 50;
 
     constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) {
-        _mint(msg.sender, 10**5);
+        _mint(msg.sender, 10**6);
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
