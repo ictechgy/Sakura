@@ -20,7 +20,6 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl, ReentrancyG
     mapping(uint => address) private crumbMap;
     uint private crumbGenID = 0;
     uint private maxSurveysPerCrumb = 50;
-    // TODO: - Access Control에 Proposal 역할 및 설문 제안에 따른 reward? / 어떤 사람이 Proposal이 될 것인지, 어떤 설문이 뽑힐 것인지 결정하는 방식 필요
 
     constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) {
         _mint(msg.sender, 10**5);
@@ -46,6 +45,7 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl, ReentrancyG
         crumbGenID = newID;
     }
 
+    // TODO: 설문 제안 시 토큰 소모 / 어떤 사람이 Proposal이 될 것인지, 어떤 설문이 뽑힐 것인지 결정하는 방식 필요
     // 설문조사 생성 요청
     function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyRole(PROPOSAL_ROLE) nonReentrant {
         require(bytes(_question).length != 0, "empty question is not allowed");
