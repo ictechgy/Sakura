@@ -26,7 +26,11 @@ contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl, ReentrancyG
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
-    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Capped) onlyRole(MINTER_ROLE, BURNER_ROLE, DEFAULT_ADMIN_ROLE) {
+    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Capped) {
+        require(
+            hasRole(MINTER_ROLE, msg.sender) || hasRole(BURNER_ROLE, msg.sender) || hasRole(DEFAULT_ADMIN_ROLE, msg.sender),
+            "You do not have proper permissions."
+        );
         super._update(from, to, value);
     }
 
