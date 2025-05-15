@@ -134,7 +134,7 @@ contract Crumb is Ownable {
     }
 
     Survey[] public surveys;
-    event Voted(address indexed voter, uint surveyIndex, uint optionIndex); // TODO: - 인덱스 범위 산정 필요
+    event Voted(address indexed voter, uint indexed surveyIndex, uint optionIndex);
 
     constructor() Ownable(msg.sender) { }
 
