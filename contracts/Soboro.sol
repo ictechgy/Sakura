@@ -134,7 +134,7 @@ contract Crumb is Ownable {
     }
 
     Survey[] public surveys;
-    event Voted(address indexed voter, uint indexed surveyIndex, uint optionIndex);
+    event Voted(address indexed voter, uint indexed surveyIndex, uint indexed optionIndex);
 
     constructor() Ownable(msg.sender) { }
 
