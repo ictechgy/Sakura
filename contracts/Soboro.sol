@@ -6,13 +6,13 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20CappedUp
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20BurnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
-import "@openzeppelin/contracts/utils/ReentrancyGuardTransient.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
 // 메인 컨트랙트 선언
-contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC20BurnableUpgradeable, AccessControlUpgradeable, ReentrancyGuardTransient {
+contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, ReentrancyGuardUpgradeable {
     bytes32 private constant BAKER_ROLE = keccak256("BAKER_ROLE");
     bytes32 private constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 private constant BURNER_ROLE = keccak256("BURNER_ROLE");
@@ -29,6 +29,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
         __ERC20Capped_init(MAX_SUPPLY);
         __ERC20Burnable_init();
         __AccessControl_init();
+        __ReentrancyGuard_init();
 
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _mint(msg.sender, 10**6);
