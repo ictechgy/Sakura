@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.26+commit.8a97fa7a"
+		"version": "0.8.30+commit.73712a01"
 	},
 	"language": "Solidity",
 	"output": {
@@ -374,7 +374,7 @@
 		"compilationTarget": {
 			"contracts/Crumb.sol": "Crumb"
 		},
-		"evmVersion": "cancun",
+		"evmVersion": "prague",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -427,11 +427,11 @@
 			]
 		},
 		"contracts/Crumb.sol": {
-			"keccak256": "0x275c1df897ab824da1c05df02df6d150c4839ec7a417a3118c9193a1b2cb99b9",
+			"keccak256": "0x93d5626e68a1049a3d2c451b1a28024c84736013bdfa836510b455d3326d392f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3fb448bb86868ff31c1ca18153f261f4767c271a0e5091b2468dc8754824c3d6",
-				"dweb:/ipfs/Qmdfw1e2TewXNaM1z8RX3V51BxTUpP123fBRT7mYZnjvFJ"
+				"bzz-raw://1f2a61afbb78483b1b7fea77c70fb9afc05f8d8ddd797b4d63e5380ba7c2f87c",
+				"dweb:/ipfs/Qmakz7qNoZgPaPYwZMULgyU4aRA9wh73cCxwrPCQDCGCT3"
 			]
 		}
 	},
