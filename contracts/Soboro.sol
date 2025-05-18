@@ -161,6 +161,8 @@ contract Crumb is Initializable, OwnableUpgradeable, ReentrancyGuardTransientUpg
         require(surveys[_surveyID].isActive, "Survey is not active");
         require(_optionIndex >= 0 && _optionIndex < surveys[_surveyID].options.length, "Invalid option index");
         require(surveys[_surveyID].hasVoted[msg.sender] == false, "User has already voted");
+        
+        require(surveys[_surveyID].voteCountPerOptions[_optionIndex] <= type(uint256).max, "optionIndex reached max");
 
         surveys[_surveyID].hasVoted[msg.sender] = true;
         surveys[_surveyID].voteCountPerOptions[_optionIndex]++;
