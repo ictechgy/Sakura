@@ -6,10 +6,10 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20CappedUp
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20BurnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardTransientUpgradeable.sol";
 
 // 메인 컨트랙트 선언
-contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, ReentrancyGuardUpgradeable {
+contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, ReentrancyGuardTransientUpgradeable {
     uint256 private constant MAX_SUPPLY = 10**11;
 
     // 메인컨트랙트는 서브 컨트랙트를 소유
