@@ -12,7 +12,7 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuardTransient.sol";
 
 // 메인 컨트랙트 선언
-contract Soboro is ERC20, ERC20Capped, ERC20Burnable, AccessControl, ReentrancyGuardTransient {
+contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC20BurnableUpgradeable, AccessControlUpgradeable, ReentrancyGuardTransient {
     bytes32 private constant BAKER_ROLE = keccak256("BAKER_ROLE");
     bytes32 private constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 private constant BURNER_ROLE = keccak256("BURNER_ROLE");
