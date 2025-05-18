@@ -82,7 +82,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     }
 
     // 특정 설문에 참여
-    function vote(uint crumbID, uint surveyIndex, uint optionIndex) public {
+    function vote(uint crumbID, uint surveyIndex, uint optionIndex) public nonReentrant {
         require(msg.sender != address(0), "invalid address");
         require(crumbID >= 0 && surveyIndex >= 0 && optionIndex >= 0 && crumbID < crumbGenID, "invalid vote request");
         
@@ -155,7 +155,7 @@ contract Crumb is Initializable, OwnableUpgradeable, ReentrancyGuardTransientUpg
     }
 
     // 투표 함수
-    function vote(uint _surveyID, uint _optionIndex) public { // TODO: nonReentrant 고려
+    function vote(uint _surveyID, uint _optionIndex) public nonReentrant {
         require(msg.sender != address(0), "invalid request");
         require(_surveyID >= 0 && _surveyID < surveys.length, "invalid id");
         require(surveys[_surveyID].isActive, "Survey is not active");
