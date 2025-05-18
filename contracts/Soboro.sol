@@ -31,16 +31,6 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
         super._update(from, to, value);
     }
 
-    function _mint(address to, uint256 amount) internal override(ERC20Upgradeable) {
-        _checkOwner();
-        super._mint(to, amount);
-    }
-
-    function _burn(address account, uint256 amount) internal override(ERC20Upgradeable) {
-        _checkOwner();
-        super._burn(account, amount);
-    }
-
     // 새로운 서브 컨트랙트를 생성
     function createCrumbContract() public onlyOwner {
         require(crumbMap[crumbGenID] == address(0), "crumb aleady baked");
