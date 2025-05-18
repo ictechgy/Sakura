@@ -34,7 +34,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // 새로운 서브 컨트랙트를 생성
     function createCrumbContract() public onlyOwner {
-        require(crumbMap[crumbGenID] == address(0), "crumb aleady baked");
+        require(crumbMap[crumbGenID] == address(0)); // crumb aleady baked
         Crumb crumb = new Crumb();
         crumbMap[crumbGenID] = address(crumb);
         crumbGenID++;
@@ -42,7 +42,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // ID 정정
     function correctCrumbGenID(uint newID) public onlyOwner {
-        require(newID >= 0 && newID <= type(uint256).max && crumbMap[newID] == address(0), "invalid new ID");
+        require(newID >= 0 && newID <= type(uint256).max && crumbMap[newID] == address(0)); // invalid new ID
 
         crumbGenID = newID;
     }
@@ -50,11 +50,11 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     // TODO: 설문 제안 시 토큰 소모 / 어떤 사람이 Proposal이 될 것인지, 어떤 설문이 뽑힐 것인지 결정하는 방식 필요
     // 설문조사 생성 요청
     function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner nonReentrant {
-        require(bytes(_question).length != 0, "empty question is not allowed");
-        require(_options.length >= 2, "At least 2 options are required");
+        require(bytes(_question).length != 0); // empty question is not allowed
+        require(_options.length >= 2); // At least 2 options are required
 
         uint latestCrumbIndex = crumbGenID - 1;
-        require(crumbMap[latestCrumbIndex] != address(0), "lastest crumb does not exist. Who ate it?");
+        require(crumbMap[latestCrumbIndex] != address(0)); // lastest crumb does not exist. Who ate it?
         
         Crumb crumb = Crumb(crumbMap[latestCrumbIndex]);
         uint countOfSurvey = crumb.getSurveyCount();
@@ -62,7 +62,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
         if (countOfSurvey < maxSurveysPerCrumb) {
             crumb.createSurvey(_question, _options, _initialActiveState);
         } else {
-            revert("max survey count per crumb reached. create Crumb first"); // 크게 revert 할 내용 없음
+            revert(); // 크게 revert 할 내용 없음 - max survey count per crumb reached. create Crumb first
         }
     }
 
@@ -70,30 +70,30 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     // 활성화상태 변경
     function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyOwner {
         require(crumbID >= 0 && crumbID <= type(uint256).max && surveyIndex >= 0 && surveyIndex <= type(uint256).max, "invalid ID/Index");
-        require(crumbMap[crumbID] != address(0), "crumb not exists");
+        require(crumbMap[crumbID] != address(0)); // crumb not exists
         
         Crumb crumb = Crumb(crumbMap[crumbID]);
 
-        require(surveyIndex < crumb.getSurveyCount() , "survey does not exist");
+        require(surveyIndex < crumb.getSurveyCount()); // survey does not exist
 
         (, bool isSurveyActive) = crumb.surveys(surveyIndex);
-        require(isSurveyActive != isActive , "survey is already in the desired active state");
+        require(isSurveyActive != isActive); // survey is already in the desired active state
         
         crumb.changeActiveStatus(surveyIndex, isActive);
     }
 
     // 특정 설문에 참여
     function vote(uint crumbID, uint surveyIndex, uint optionIndex) public nonReentrant {
-        require(msg.sender != address(0), "invalid address");
+        require(msg.sender != address(0)); // invalid address
         require(crumbID >= 0 && crumbID <= type(uint256).max && surveyIndex >= 0 && surveyIndex <= type(uint256).max && optionIndex >= 0 && optionIndex <= type(uint256).max && crumbID < crumbGenID, "invalid vote request");
         
         Crumb crumb = Crumb(crumbMap[crumbID]);
 
-        require(surveyIndex < crumb.getSurveyCount() , "survey does not exist");
+        require(surveyIndex < crumb.getSurveyCount()); // survey does not exist
 
         (, bool isSurveyActive) = crumb.surveys(surveyIndex);
-        require(isSurveyActive == true, "survey is not activated");
-        require(crumb.amIVoted(surveyIndex) == false, "aleady voted");
+        require(isSurveyActive == true); // survey is not activated
+        require(crumb.amIVoted(surveyIndex) == false); // aleady voted
 
         crumb.vote(surveyIndex, optionIndex);
     }
@@ -105,15 +105,15 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // 특정 index Crumb 반환
     function getCrumb(uint index) public view returns (Crumb) {
-        require(index >= 0 && index <= type(uint256).max && index < crumbGenID, "invalid index");
-        require(crumbMap[index] != address(0), "crumb not exists");
+        require(index >= 0 && index <= type(uint256).max && index < crumbGenID); // invalid index
+        require(crumbMap[index] != address(0)); // crumb not exists
 
         return Crumb(crumbMap[index]);
     }
 
     // maxCount 조정
     function setMaxSurveyCount(uint newMaxSurveyCount) public onlyOwner {
-        require(newMaxSurveyCount >= 1 && maxSurveysPerCrumb <= type(uint256).max, "invalid count");
+        require(newMaxSurveyCount >= 1 && maxSurveysPerCrumb <= type(uint256).max); // invalid count
         
         maxSurveysPerCrumb = newMaxSurveyCount;
     }
