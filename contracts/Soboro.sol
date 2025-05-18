@@ -28,7 +28,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     }
 
     // 새로운 서브 컨트랙트를 생성
-    function createCrumbContract() public onlyRole(BAKER_ROLE) {
+    function createCrumbContract() public onlyOwner {
         require(crumbMap[crumbGenID] == address(0), "crumb aleady baked");
         Crumb crumb = new Crumb();
         crumbMap[crumbGenID] = address(crumb);
@@ -36,7 +36,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     }
 
     // ID 정정
-    function correctCrumbGenID(uint newID) public onlyRole(BAKER_ROLE) {
+    function correctCrumbGenID(uint newID) public onlyOwner {
         require(newID >= 0 && crumbMap[newID] == address(0), "invalid new ID");
 
         crumbGenID = newID;
@@ -44,7 +44,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // TODO: 설문 제안 시 토큰 소모 / 어떤 사람이 Proposal이 될 것인지, 어떤 설문이 뽑힐 것인지 결정하는 방식 필요
     // 설문조사 생성 요청
-    function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyRole(PROPOSAL_ROLE) nonReentrant {
+    function requestSurveyCreation(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner nonReentrant {
         require(bytes(_question).length != 0, "empty question is not allowed");
         require(_options.length >= 2, "At least 2 options are required");
 
@@ -63,7 +63,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // TODO: - 보상 생태계(활성화 상태 변경했을 때 또는 투표 종료 시 - batch)
     // 활성화상태 변경
-    function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyRole(PROPOSAL_ROLE) {
+    function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyOwner {
         require(crumbID >= 0 && surveyIndex >= 0, "invalid ID/Index");
         require(crumbMap[crumbID] != address(0), "crumb not exists");
         
@@ -107,7 +107,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     }
 
     // maxCount 조정
-    function setMaxSurveyCount(uint newMaxSurveyCount) public onlyRole(BAKER_ROLE) {
+    function setMaxSurveyCount(uint newMaxSurveyCount) public onlyOwner {
         require(newMaxSurveyCount >= 1, "invalid count");
         
         maxSurveysPerCrumb = newMaxSurveyCount;
