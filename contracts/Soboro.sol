@@ -28,7 +28,6 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     }
 
     function _update(address from, address to, uint256 value) internal override(ERC20Upgradeable, ERC20CappedUpgradeable) {
-        _checkOwner();
         super._update(from, to, value);
     }
 
