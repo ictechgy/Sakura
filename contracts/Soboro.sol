@@ -24,9 +24,14 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     uint private crumbGenID = 0;
     uint private maxSurveysPerCrumb = 50;
 
-    constructor() ERC20("Soboro", "SBR") ERC20Capped(MAX_SUPPLY) {
+    function initialize() public initializer {
+        __ERC20_init("Soboro", "SBR"); 
+        __ERC20Capped_init(MAX_SUPPLY);
+        __ERC20Burnable_init();
+        __AccessControl_init();
+
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _mint(msg.sender, 10**6);
-        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
     function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Capped) {
