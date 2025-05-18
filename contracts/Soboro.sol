@@ -21,10 +21,9 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
         __ERC20_init("Soboro", "SBR"); 
         __ERC20Capped_init(MAX_SUPPLY);
         __ERC20Burnable_init();
-        __AccessControl_init();
+        __Ownable_init(msg.sender);
         __ReentrancyGuard_init();
 
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _mint(msg.sender, 10**6);
     }
 
