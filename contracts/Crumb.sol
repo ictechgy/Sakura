@@ -71,7 +71,7 @@ contract Crumb is Initializable, OwnableUpgradeable, ReentrancyGuardTransientUpg
     // 내가 특정 설문에 참여했는지 확인 (msg.sender)
     function amIVoted(uint surveyID) public view returns (bool) {
         require(surveyID >= 0 && surveyID <= type(uint256).max && surveyID < surveys.length, "invalid id");
-        hasVoted(msg.sender, surveyID);
+        return hasVoted(msg.sender, surveyID);
     }
 
     // 누군가가 특정 설문에 참여했는지 확인
