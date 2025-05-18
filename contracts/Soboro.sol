@@ -117,7 +117,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 }
 
 // 하위 컨트랙트
-contract Crumb is Ownable {
+contract Crumb is Initializable, OwnableUpgradeable {
     struct Survey {
         string question;
         string[] options;
@@ -129,7 +129,12 @@ contract Crumb is Ownable {
     Survey[] public surveys;
     event Voted(address indexed voter, uint indexed surveyIndex, uint indexed optionIndex);
 
-    constructor() Ownable(msg.sender) { }
+    function initialize() public initializer {
+        __Ownable_init(msg.sender);
+        __ReentrancyGuard_init();
+
+        _mint(msg.sender, 10**6);
+    }
 
     // 설문조사 생성
     function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
