@@ -41,7 +41,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // ID 정정
     function correctCrumbGenID(uint newID) public onlyOwner {
-        require(newID >= 0 && crumbMap[newID] == address(0), "invalid new ID");
+        require(newID >= 0 && newID <= type(uint256).max && crumbMap[newID] == address(0), "invalid new ID");
 
         crumbGenID = newID;
     }
@@ -68,7 +68,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     // TODO: - 보상 생태계(활성화 상태 변경했을 때 또는 투표 종료 시 - batch)
     // 활성화상태 변경
     function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyOwner {
-        require(crumbID >= 0 && surveyIndex >= 0, "invalid ID/Index");
+        require(crumbID >= 0 && crumbID <= type(uint256).max && surveyIndex >= 0 && surveyIndex <= type(uint256).max, "invalid ID/Index");
         require(crumbMap[crumbID] != address(0), "crumb not exists");
         
         Crumb crumb = Crumb(crumbMap[crumbID]);
@@ -84,7 +84,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     // 특정 설문에 참여
     function vote(uint crumbID, uint surveyIndex, uint optionIndex) public nonReentrant {
         require(msg.sender != address(0), "invalid address");
-        require(crumbID >= 0 && surveyIndex >= 0 && optionIndex >= 0 && crumbID < crumbGenID, "invalid vote request");
+        require(crumbID >= 0 && crumbID <= type(uint256).max && surveyIndex >= 0 && surveyIndex <= type(uint256).max && optionIndex >= 0 && optionIndex <= type(uint256).max && crumbID < crumbGenID, "invalid vote request");
         
         Crumb crumb = Crumb(crumbMap[crumbID]);
 
@@ -104,7 +104,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // 특정 index Crumb 반환
     function getCrumb(uint index) public view returns (Crumb) {
-        require(index >= 0 && index < crumbGenID, "invalid index");
+        require(index >= 0 && index <= type(uint256).max && index < crumbGenID, "invalid index");
         require(crumbMap[index] != address(0), "crumb not exists");
 
         return Crumb(crumbMap[index]);
@@ -112,7 +112,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // maxCount 조정
     function setMaxSurveyCount(uint newMaxSurveyCount) public onlyOwner {
-        require(newMaxSurveyCount >= 1, "invalid count");
+        require(newMaxSurveyCount >= 1 && maxSurveysPerCrumb <= type(uint256).max, "invalid count");
         
         maxSurveysPerCrumb = newMaxSurveyCount;
     }
@@ -157,9 +157,9 @@ contract Crumb is Initializable, OwnableUpgradeable, ReentrancyGuardTransientUpg
     // 투표 함수
     function vote(uint _surveyID, uint _optionIndex) public nonReentrant {
         require(msg.sender != address(0), "invalid request");
-        require(_surveyID >= 0 && _surveyID < surveys.length, "invalid id");
+        require(_surveyID >= 0 && _surveyID <= type(uint256).max && _surveyID < surveys.length, "invalid id");
         require(surveys[_surveyID].isActive, "Survey is not active");
-        require(_optionIndex < surveys[_surveyID].options.length, "Invalid option index");
+        require(_optionIndex >= 0 && _optionIndex < surveys[_surveyID].options.length, "Invalid option index");
         require(surveys[_surveyID].hasVoted[msg.sender] == false, "User has already voted");
 
         surveys[_surveyID].hasVoted[msg.sender] = true;
@@ -170,7 +170,7 @@ contract Crumb is Initializable, OwnableUpgradeable, ReentrancyGuardTransientUpg
 
     // 활성화 상태 변경
     function changeActiveStatus(uint surveyIndex, bool isActive) public onlyOwner {
-        require(surveyIndex >= 0 && surveyIndex < surveys.length, "invalid index");
+        require(surveyIndex >= 0 && surveyIndex < surveys.length && surveyIndex <= type(uint256).max, "invalid index");
         require(surveys[surveyIndex].isActive != isActive , "survey is already in the desired active state");
         
         surveys[surveyIndex].isActive = isActive;
@@ -183,20 +183,21 @@ contract Crumb is Initializable, OwnableUpgradeable, ReentrancyGuardTransientUpg
 
     // 내가 특정 설문에 참여했는지 확인 (msg.sender)
     function amIVoted(uint surveyID) public view returns (bool) {
+        require(surveyID >= 0 && surveyID <= type(uint256).max && surveyID < surveys.length, "invalid id");
         hasVoted(msg.sender, surveyID);
     }
 
     // 누군가가 특정 설문에 참여했는지 확인
     function hasVoted(address voterAddress, uint surveyID) public view returns (bool) {
         require(voterAddress != address(0), "invalid address");
-        require(surveyID >= 0 && surveyID < surveys.length, "invalid survey ID");
+        require(surveyID >= 0 && surveyID < surveys.length && surveyID <= type(uint256).max, "invalid survey ID");
 
         return surveys[surveyID].hasVoted[voterAddress];
     }
 
     // 특정 index Survey의 부가정보(선택지) 조회 (자동 getter에서 돌려주지 않는)
     function getSurveyOptions(uint surveyIndex) public view returns (string[] memory) {
-        require(surveyIndex >= 0 && surveyIndex < surveys.length, "invalid index");
+        require(surveyIndex >= 0 && surveyIndex < surveys.length && surveyIndex <= type(uint256).max, "invalid index");
         
         string[] memory options = surveys[surveyIndex].options; // TODO: 캐스팅 명시화 필요한지 확인
         return options;
@@ -204,7 +205,7 @@ contract Crumb is Initializable, OwnableUpgradeable, ReentrancyGuardTransientUpg
 
     // 특정 index Survey의 부가정보(항목별 투표 수) 조회 (자동 getter에서 돌려주지 않는)
     function getSurveyVoteCountPerOptions(uint surveyIndex) public view returns (uint256[] memory) {
-        require(surveyIndex >= 0 && surveyIndex < surveys.length , "invalid index");
+        require(surveyIndex >= 0 && surveyIndex < surveys.length && surveyIndex <= type(uint256).max, "invalid index");
         
         return surveys[surveyIndex].voteCountPerOptions;
     }
