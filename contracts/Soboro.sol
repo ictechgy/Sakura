@@ -27,14 +27,6 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
         _mint(msg.sender, 10**6);
     }
 
-    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Capped) {
-        require(
-            hasRole(MINTER_ROLE, msg.sender) || hasRole(BURNER_ROLE, msg.sender) || hasRole(DEFAULT_ADMIN_ROLE, msg.sender),
-            "You do not have proper permissions."
-        );
-        super._update(from, to, value);
-    }
-
     // 새로운 서브 컨트랙트를 생성
     function createCrumbContract() public onlyRole(BAKER_ROLE) {
         require(crumbMap[crumbGenID] == address(0), "crumb aleady baked");
