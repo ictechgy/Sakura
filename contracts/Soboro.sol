@@ -10,10 +10,6 @@ import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 
 // 메인 컨트랙트 선언
 contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable, ReentrancyGuardUpgradeable {
-    bytes32 private constant BAKER_ROLE = keccak256("BAKER_ROLE");
-    bytes32 private constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    bytes32 private constant BURNER_ROLE = keccak256("BURNER_ROLE");
-    bytes32 private constant PROPOSAL_ROLE = keccak256("PROPOSAL_ROLE");
     uint256 private constant MAX_SUPPLY = 10**11;
 
     // 메인컨트랙트는 서브 컨트랙트를 소유
