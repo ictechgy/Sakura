@@ -49,7 +49,6 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
 
     // TODO: 설문 제안 시 토큰 소모 / 어떤 사람이 Proposal이 될 것인지, 어떤 설문이 뽑힐 것인지 결정하는 방식 필요
     // 설문조사 생성 요청
-    // 🔥 TODO for security vulnerabilities: bool값 true || false 검증 필요? - 일반적으로는 검증 필요없으나 proxy 패턴이라 delegatecall에서의 확인 필요하려나 🤔
     function requestSurveyCreation(string calldata _question, string[] calldata _options, bool _initialActiveState) public onlyOwner nonReentrant {
         require(bytes(_question).length != 0); // empty question is not allowed
         require(_options.length >= 2); // At least 2 options are required
