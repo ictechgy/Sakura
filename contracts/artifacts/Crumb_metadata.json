@@ -427,11 +427,11 @@
 			]
 		},
 		"contracts/Crumb.sol": {
-			"keccak256": "0x93d5626e68a1049a3d2c451b1a28024c84736013bdfa836510b455d3326d392f",
+			"keccak256": "0x15ef1cf4bb929f3f3ad214084c20e2184a3e51547cb51b4656aee51c4067400a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1f2a61afbb78483b1b7fea77c70fb9afc05f8d8ddd797b4d63e5380ba7c2f87c",
-				"dweb:/ipfs/Qmakz7qNoZgPaPYwZMULgyU4aRA9wh73cCxwrPCQDCGCT3"
+				"bzz-raw://9441462a10874b749090e5a250f3cf14f39d9c4403b56114ecd126618f251c41",
+				"dweb:/ipfs/QmWsmcwcD8yARQPq2q5GM6qjJcm5C9Dq236zyzAqjvrwKR"
 			]
 		}
 	},

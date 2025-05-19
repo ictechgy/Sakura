@@ -24,7 +24,7 @@ contract Crumb is Initializable, OwnableUpgradeable, ReentrancyGuardTransientUpg
     }
 
     // 설문조사 생성
-    function createSurvey(string memory _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
+    function createSurvey(string calldata _question, string[] memory _options, bool _initialActiveState) public onlyOwner {
         require(bytes(_question).length != 0, "empty question is not allowed");
         require(_options.length >= 2, "At least 2 options are required");
         
