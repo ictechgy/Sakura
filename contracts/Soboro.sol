@@ -69,7 +69,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     // TODO: - 보상 생태계(활성화 상태 변경했을 때 또는 투표 종료 시 - batch)
     // 활성화상태 변경
     function changeActiveStatus(uint crumbID, uint surveyIndex, bool isActive) public onlyOwner {
-        require(crumbID >= 0 && crumbID <= type(uint256).max && surveyIndex >= 0 && surveyIndex <= type(uint256).max, "invalid ID/Index");
+        require(crumbID >= 0 && crumbID <= type(uint256).max && surveyIndex >= 0 && surveyIndex <= type(uint256).max); // "invalid ID/Index"
         require(crumbMap[crumbID] != address(0)); // crumb not exists
         
         Crumb crumb = Crumb(crumbMap[crumbID]);
@@ -85,7 +85,7 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
     // 특정 설문에 참여
     function vote(uint crumbID, uint surveyIndex, uint optionIndex) public nonReentrant {
         require(msg.sender != address(0)); // invalid address
-        require(crumbID >= 0 && crumbID <= type(uint256).max && surveyIndex >= 0 && surveyIndex <= type(uint256).max && optionIndex >= 0 && optionIndex <= type(uint256).max && crumbID < crumbGenID, "invalid vote request");
+        require(crumbID >= 0 && crumbID <= type(uint256).max && surveyIndex >= 0 && surveyIndex <= type(uint256).max && optionIndex >= 0 && optionIndex <= type(uint256).max && crumbID < crumbGenID); // "invalid vote request"
         
         Crumb crumb = Crumb(crumbMap[crumbID]);
 
@@ -118,5 +118,5 @@ contract Soboro is Initializable, ERC20Upgradeable, ERC20CappedUpgradeable, ERC2
         maxSurveysPerCrumb = newMaxSurveyCount;
     }
 
-    // TODO: Proxy 패턴 또는 CrumbManager (로직 분리)
+    // TODO: CrumbManager (로직 분리)
 }
